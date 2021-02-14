@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IconicFund.Helpers\IconicFund.Helpers.csproj" />
+    <ProjectReference Include="..\IconicFund.Models\IconicFund.Models.csproj" />
   </ItemGroup>
 
 </Project>

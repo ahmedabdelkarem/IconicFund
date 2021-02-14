@@ -13,4 +13,8 @@
     <Folder Include="Shared\Dtos\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IconicFund.Resources\IconicFund.Resources.csproj" />
+  </ItemGroup>
+
 </Project>
