@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Models", "Iconic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Repositories", "IconicFund.Repositories\IconicFund.Repositories.csproj", "{594A9B86-0904-4026-9422-1FC2D8AEBBBE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Resources", "IconicFund.Resources\IconicFund.Resources.csproj", "{D57AFB02-1695-4C0B-AB9A-578E3436125C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{594A9B86-0904-4026-9422-1FC2D8AEBBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{594A9B86-0904-4026-9422-1FC2D8AEBBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{594A9B86-0904-4026-9422-1FC2D8AEBBBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D57AFB02-1695-4C0B-AB9A-578E3436125C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57AFB02-1695-4C0B-AB9A-578E3436125C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57AFB02-1695-4C0B-AB9A-578E3436125C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57AFB02-1695-4C0B-AB9A-578E3436125C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
