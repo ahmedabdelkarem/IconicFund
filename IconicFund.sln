@@ -9,10 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Context", "Iconi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Helpers", "IconicFund.Helpers\IconicFund.Helpers.csproj", "{76902BA4-70BE-47FA-A21C-F71A29CEDDF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Repositories", "IconicFund.Repositories\IconicFund.Repositories.csproj", "{6AB61A32-8D50-4271-A781-A9FC848F6EF3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Resources", "IconicFund.Resources\IconicFund.Resources.csproj", "{2CC01BA7-450F-4812-ADAD-C75E3375EE28}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,14 +27,6 @@ Global
 		{76902BA4-70BE-47FA-A21C-F71A29CEDDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76902BA4-70BE-47FA-A21C-F71A29CEDDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76902BA4-70BE-47FA-A21C-F71A29CEDDF4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6AB61A32-8D50-4271-A781-A9FC848F6EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6AB61A32-8D50-4271-A781-A9FC848F6EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6AB61A32-8D50-4271-A781-A9FC848F6EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6AB61A32-8D50-4271-A781-A9FC848F6EF3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CC01BA7-450F-4812-ADAD-C75E3375EE28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CC01BA7-450F-4812-ADAD-C75E3375EE28}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CC01BA7-450F-4812-ADAD-C75E3375EE28}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CC01BA7-450F-4812-ADAD-C75E3375EE28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
