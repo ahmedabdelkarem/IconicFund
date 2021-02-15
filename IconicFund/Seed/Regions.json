@@ -1,0 +1,10 @@
+﻿{
+  "Regions": [
+    {
+      "Id": 1,
+      "IsActive": true,
+      "Name": "المنطقة الغربية",
+      "CityId": 4
+    }
+  ]
+}
