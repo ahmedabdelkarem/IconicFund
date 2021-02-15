@@ -1,0 +1,131 @@
+﻿
+<style>
+    select {
+        width: 100%;
+        height: 30px;
+    }
+
+    .customLable {
+        float: left;
+        padding-right: 5px;
+    }
+    h2.maincolor{
+        color:white;
+        text-align:center;
+    }
+    .panel-body{
+        padding:10px 15px;
+    }
+</style>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="mainPanelHeading">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left customeResponsive">
+                    <div class="content">
+                        <h2 class="panel-title maincolor">
+                            Filter   
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-1">
+                <label>اسم المستخدم</label>
+            </div>
+            <div class="col-xs-3">
+                @Html.DropDownList("user_ddl", new SelectList(new CMS.BLL.Setting.SecurityUser_Bll().Get_Security_BasicInfo(), "ID", "Name"), @CMS.LanguagePack.GenericLP.SelectLb, new { @class = "it100 select2" })
+            </div>
+            <div class="col-xs-1 ">
+                <label>اسم القسم</label>
+            </div>
+            <div class="col-xs-3">
+                @Html.DropDownList("Dep_ddl", new SelectList(new CMS.BLL.Setting.Department_Bll().Get_Department_BasicInfo(), "ID", "Name"), @CMS.LanguagePack.GenericLP.SelectLb, new { @class = "it100 select2" })
+            </div>
+            <div class="col-xs-1">
+                <label>درجه الاهميه</label>
+            </div>
+            <div class="col-xs-3">
+                @Html.DropDownList("PriorityId", new SelectList(new CMS.BLL.Setting.PriorityLevel_Bll().Get_All_PriorityLevels(), "Id", "ArabicName"), @CMS.LanguagePack.GenericLP.SelectLb, new { @class = "it100 select2 viewclassselect lkupDDLEvent" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">
+                <label>نوع الوارد</label>
+            </div>
+            <div class="col-xs-3">
+                @Html.DropDownList("CorrespondenceCategory", new SelectList(new CMS.BLL.SystemLookup.CorrespondenceCategory_BLL().Get_All_CorrespondenceCategory(), "Id", "ArabicName"), @CMS.LanguagePack.GenericLP.SelectLb, new { @class = "it100 select2 viewclassselect lkupDDLEvent" })
+            </div>
+
+            <div class="col-xs-1">
+                <label>النوع</label>
+            </div>
+
+            <div class="col-xs-3">
+                @Html.DropDownList("TopicKindId", new SelectList(new CMS.BLL.SystemLookup.TopicKind_BLL().Get_All_TopicKinds(), "Id", "AName"), @CMS.LanguagePack.GenericLP.SelectLb, new { @class = "it100 select2 viewclassselect lkupDDLEvent" })
+            </div>
+            <div class="col-xs-1">
+                <label>النوع</label>
+            </div>
+            <div class="col-xs-3">
+                @Html.DropDownList("CorrespondenceStatus", new SelectList(new CMS.BLL.SystemLookup.CorrespondenceStatus_BLL().Get_CorrespondenceStatus_BasicInfo(), "ID", "Name"), @CMS.LanguagePack.GenericLP.SelectLb, new { @class = "it100 select2 viewclassselect lkupDDLEvent" })
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-xs-1 ">
+                <label class="customLable">التايرخ من</label>
+            </div>
+            <div class="col-xs-3">
+                <div class='input-group date formStyle PagedateTimePicker  '>
+
+                    <input type="text" id="RecievedFrom" placeholder="من تاريخ استلام" class="form-control viewclass" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-xs-1 ">
+                <label class="customLable">التاريخ الى</label>
+            </div>
+            <div class="col-xs-3">
+                <div class='input-group date formStyle PagedateTimePicker  '>
+
+                    <input type="text" id="RecievedTo" placeholder="إلى تاريخ استلام" class="form-control viewclass" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <input type="radio" name="ClassifyBy" id="rdByMonth" value="1" checked /><span>تصنيف بالشهر</span>
+
+            </div>
+            <div class="col-xs-2">
+                <input type="radio" name="ClassifyBy" id="rdByDay" value="2" /><span>تصنيف باليوم</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('.datePickerTool_after_our_day').datetimepicker({
+            minDate: moment(),
+            format: 'DD/MM/YYYY',
+            useCurrent: false
+
+        });
+        $('.datePickerTool_Before_our_day').datetimepicker({
+            maxDate: moment(),
+            format: 'DD/MM/YYYY',
+            useCurrent: false
+        });
+    })
+</script>

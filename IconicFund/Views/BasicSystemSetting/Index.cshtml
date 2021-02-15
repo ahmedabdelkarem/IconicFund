@@ -1,0 +1,224 @@
+﻿@model IconicFund.Web.Models.BasicSystemSettingViewModel
+
+<link href="~/css/datepicker/query.calendars.picker.css" rel="stylesheet" />
+<style>
+    .kt-portlet__head {
+        padding: 0 20px !important;
+    }
+</style>
+<div class="kt-portlet kt-portlet--mobile">
+    <div class="kt-portlet__head kt-portlet__head--lg">
+        <div class="kt-portlet__head-label">
+            <span class="kt-portlet__head-icon"><i class="kt-font-brand flaticon2-lock"></i></span>
+            <h3 class="kt-portlet__head-title">  @Labels.SystemSetting</h3>
+        </div>
+    </div>
+    <div class="kt-portlet__body" style="background-color: #EFF1F2">
+        <!--begin::Form-->
+        <div class="form-row col-sm-12">
+            @using (Html.BeginForm("Index", "BasicSystemSetting", FormMethod.Post, new { @class = "kt-form col-md-12", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(o => o.Id)
+                @Html.HiddenFor(o => o.SystemLogo)
+
+                <div class="kt-portlet__body">
+
+                    <div class="kt-section kt-section--first">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                @if (!string.IsNullOrEmpty(Model.SystemLogo))
+                                {
+                                    <img src="@(Model.FullPathImage)" alt="@Model.SystemLogo" class="align-content-center" style="width: 15%;" />
+                                }
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="kt-font-bold kt-font-dark">
+                                    @Labels.SystemLogo
+                                </label><span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                <div></div>
+                                <div class="custom-file">
+                                    <input type="file" name="NewProfileImage" class="custom-file-input" id="customFile1">
+                                    <label class="custom-file-label" for="NewProfileImage">@Labels.ChooseFile</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.SystemTitle_Ar, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.SystemTitle_Ar, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.SystemTitle_Ar, "")</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.SystemTitle_En, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.SystemTitle_En, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.SystemTitle_En, "")</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.DateTypeId_Fk, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.DropDownListFor(model => model.DateTypeId_Fk, Model.DateTypes, Labels.Select, new { @class = "form-control form-control-sm form-filter kt-input" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.DateTypeId_Fk, "")</div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.SessionTime, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.SessionTime, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.SessionTime, "")</div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="kt-font-bold kt-font-dark">
+                                    @Labels.MaxFileSize
+                                </label>
+                                @Html.TextBoxFor(m => m.MaxFileSize, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.MaxFileSize, "")</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.ManyWrongLoginAvailability, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.ManyWrongLoginAvailability, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.ManyWrongLoginAvailability, "")</div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.PasswordExpiredAfter, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.PasswordExpiredAfter, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.PasswordExpiredAfter, "")</div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.MinPassword, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.MinPassword, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.MinPassword, "")</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(model => model.PasswordComplexityId_Fk, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.DropDownListFor(model => model.PasswordComplexityId_Fk, Model.PasswordComplexitys, Labels.Select, new { @class = "form-control form-control-sm form-filter kt-input" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.PasswordComplexityId_Fk, "")</div>
+                            </div>
+                            <div class="form-group col-md-3 mt-5">
+                                <label class="kt-checkbox">
+                                    @Labels.IsAllowToUserToLoginManyTime
+                                    @Html.CheckBox("IsAllowToUserToLoginManyTime")
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(model => model.GroupPermissionCode, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.DropDownListFor(model => model.GroupPermissionCode, Model.GroupPermissionList, Labels.Select, new { @class = "form-control form-control-sm form-filter kt-input" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.GroupPermissionCode, "")</div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(model => model.IncomingPrefixType, new { @class = "kt-font-bold kt-font-dark" })
+                                @*@Html.DropDownListFor(model => model.GroupPermissionCode, Model.GroupPermissionList, Labels.Select, new { @class = "form-control form-control-sm form-filter kt-input" })*@
+                                @Html.DropDownListFor(model => model.IncomingPrefixType, Html.GetEnumValueSelectListWithIntValues<SerialNumberType>()
+                               , new { @class = "form-control form-control-sm form-filter kt-input", @onchange = "onPrefixTypeChanged(this.value , 'IncomingSerialNum')" })
+                                @*<div class="invalid-feedback">@Html.ValidationMessageFor(m => m.GroupPermissionCode, "")</div>*@
+                            </div>
+                        </div>
+
+                        <div class="row"  id="IncomingSerialNum">
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(m => m.IncomingSerialNumberPrefix, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.IncomingSerialNumberPrefix, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.IncomingSerialNumberPrefix)</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(m => m.IncomingSerialNumberStartValue, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.IncomingSerialNumberStartValue, new { @class = "form-control", @type = "number" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.IncomingSerialNumberStartValue, "")</div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(m => m.IncomingSerialNumberDigitsCount, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.IncomingSerialNumberDigitsCount, new { @class = "form-control", @type = "number" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.IncomingSerialNumberDigitsCount, "")</div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(m => m.IncomingSerialNumberPostfix, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.IncomingSerialNumberPostfix, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.IncomingSerialNumberPostfix, "")</div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(model => model.ExportPrefixType, new { @class = "kt-font-bold kt-font-dark" })
+                                @*@Html.DropDownListFor(model => model.GroupPermissionCode, Model.GroupPermissionList, Labels.Select, new { @class = "form-control form-control-sm form-filter kt-input" })*@
+                                @Html.DropDownListFor(model => model.ExportPrefixType, Html.GetEnumValueSelectListWithIntValues<SerialNumberType>()
+                               , new { @class = "form-control form-control-sm form-filter kt-input", @onchange = "onPrefixTypeChanged(this.value , 'ExportSerialNum')" })
+                                @*<div class="invalid-feedback">@Html.ValidationMessageFor(m => m.GroupPermissionCode, "")</div>*@
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-3" id="ExportSerialNum">
+                                @Html.LabelFor(m => m.ExportSerialNumberPrefix, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.ExportSerialNumberPrefix, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.ExportSerialNumberPrefix, "")</div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(m => m.ExportSerialNumberStartValue, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.ExportSerialNumberStartValue, new { @class = "form-control", @type = "number" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.ExportSerialNumberStartValue, "")</div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(m => m.ExportSerialNumberDigitsCount, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.ExportSerialNumberDigitsCount, new { @class = "form-control", @type = "number" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.ExportSerialNumberDigitsCount, "")</div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                @Html.LabelFor(m => m.ExportSerialNumberPostfix, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.ExportSerialNumberPostfix, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.ExportSerialNumberPostfix, "")</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-form__actions">
+                        <button type="submit" class="btn btn-success">@Labels.Save</button>
+                        <a class="btn btn-cancel" asp-controller="Departments" asp-action="Index">@Labels.Cancel</a>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!--end::Form-->
+    </div>
+</div>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+
+<script>
+
+    $("document").ready(function () {
+        $("#errorMsgRoles").hide();
+
+        onPrefixTypeChanged('@Model.IncomingPrefixType', 'IncomingSerialNum');
+        onPrefixTypeChanged('@Model.ExportPrefixType', 'ExportSerialNum');
+    });
+
+    function onPrefixTypeChanged(selectedVal , divId)
+    {
+        console.log(selectedVal);
+        if (selectedVal == '@Convert.ToInt32(SerialNumberType.StringAndNumber)')
+        {
+            $('#' + divId).css('display', 'block')
+        }
+        else
+        {
+            $('#' + divId).css('display', 'none')
+        }
+    }
+
+</script>

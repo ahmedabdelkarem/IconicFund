@@ -1,0 +1,248 @@
+﻿@model IconicFund.Web.Models.AdminViewModel
+    <style>
+        .kt-portlet__head {
+            padding: 0 20px !important;
+        }
+    </style>
+    <link href="~/css/datepicker/query.calendars.picker.css" rel="stylesheet" />
+
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon"><i class="kt-font-brand flaticon2-lock"></i></span>
+                <h3 class="kt-portlet__head-title"> @Labels.Create @Labels.Admin</h3>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <!--begin::Form-->
+            @using (Html.BeginForm("Create", "Admins", FormMethod.Post, new { @class = "kt-form col-md-12", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="kt-portlet__body">
+                    <div class="kt-section kt-section--first">
+                        <div class="form-group row">
+                            <div class="col-lg-3">
+                                @Html.LabelFor(m => m.FirstName, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.FirstName, "")</div>
+                            </div>
+                            <div class="col-lg-3">
+                                @Html.LabelFor(m => m.SecondName, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.SecondName, new { @class = "form-control" })
+                            </div>
+                            <div class="col-lg-3">
+                                @Html.LabelFor(m => m.ThirdName, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.ThirdName, new { @class = "form-control" })
+                            </div>
+                            <div class="col-lg-3">
+                                @Html.LabelFor(m => m.LastName, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.LastName, "")</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.NationalId, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.NationalId, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.NationalId, "")</div>
+                            </div>
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.EmplyeeNo, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.EmplyeeNo, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.EmplyeeNo, "")</div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.MobileNumber, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.MobileNumber, "")</div>
+                            </div>
+                            <div class="col-lg-6">
+                                @Html.LabelFor(m => m.Email, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Email, "")</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ProfileImage, new { @class = "kt-font-bold kt-font-dark" })
+                                <div></div>
+                                <div class="custom-file">
+                                    <input type="file" name="ProfileImage" class="custom-file-input" id="customFile1">
+                                    <label class="custom-file-label" for="ProfileImage">@Labels.ChooseFile</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.SignatureImage, new { @class = "kt-font-bold kt-font-dark" })
+                                <div></div>
+                                <div class="custom-file">
+                                    <input type="file" name="SignatureImage" class="custom-file-input" id="customFile2">
+                                    <label class="custom-file-label" for="SignatureImage">@Labels.ChooseFile</label>
+                                </div>
+                                @*<button class="btn btn-brand" onclick="DWTScan()" data-toggle="modal" data-target="#myModalDWT" data-backdrop="static" data-keyboard="false">@Labels.Scan</button>*@
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ActivationStartDate, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                <div class='input-group date'>
+                                    <input type="text" asp-for="@Model.ActivationStartDate" class=" form-control txtHijriDate" asp-format="{0:dd-MMMM-yyyy}">
+                                    <div class="input-group-append"> <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>   </div>
+                                    <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.ActivationStartDate, "") </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Ger_ActivationStartDate, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                <div class='input-group date'>
+                                    <input type="text" asp-for="@Model.Ger_ActivationStartDate" class=" form-control txtGregorianDate" asp-format="{0:dd-MMMM-yyyy}">
+                                    <div class="input-group-append"> <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>   </div>
+                                    <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Ger_ActivationStartDate, "") </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.ActivationEndDate, new { @class = "kt-font-bold kt-font-dark" })
+                                <div class='input-group date'>
+                                    <input type="text" asp-for="@Model.ActivationEndDate" class=" form-control txtHijriDate" asp-format="{0:dd-MMMM-yyyy}">
+                                    <div class="input-group-append"> <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>   </div>
+
+                                    <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.ActivationEndDate, "") </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Ger_ActivationEndDate, new { @class = "kt-font-bold kt-font-dark" })
+                                <div class='input-group date'>
+                                    <input type="text" asp-for="@Model.Ger_ActivationEndDate" class=" form-control txtGregorianDate" asp-format="{0:dd-MMMM-yyyy}">
+                                    <div class="input-group-append"> <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>   </div>
+
+                                    <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Ger_ActivationEndDate, "") </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.Title, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Title, "")</div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.CanApprove, new { @class = "kt-font-bold kt-font-dark" })
+                                <div class="kt-radio-inline">
+                                    <label class="kt-radio">
+                                        @Html.RadioButtonFor(m => m.CanApprove, true)
+                                        @Labels.Yes
+                                        <span></span>
+                                    </label>
+                                    <label class="kt-radio">
+                                        @Html.RadioButtonFor(m => m.CanApprove, false)
+                                        @Labels.No
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="kt-font-bold kt-font-dark">@Labels.Active</label>
+                                <div class="kt-radio-inline">
+                                    <label class="kt-radio">
+                                        @Html.RadioButtonFor(m => m.IsActive, true)
+                                        @Labels.Yes
+                                        <span></span>
+                                    </label>
+                                    <label class="kt-radio">
+                                        @Html.RadioButtonFor(m => m.IsActive, false)
+                                        @Labels.No
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="kt-font-bold kt-font-dark">@Labels.IsManager</label>
+                                <div class="kt-radio-inline">
+                                    <label class="kt-radio">
+                                        @Html.RadioButtonFor(m => m.IsManager, true)
+                                        @Labels.Yes
+                                        <span></span>
+                                    </label>
+                                    <label class="kt-radio">
+                                        @Html.RadioButtonFor(m => m.IsManager, false)
+                                        @Labels.No
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                @Html.LabelFor(m => m.DepartmentCode, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                @Html.DropDownListFor(m => m.DepartmentCode, Model.Departments, Labels.Select, new { @class = "form-control form-control-sm form-filter kt-input" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.DepartmentCode, "")</div>
+                            </div>
+                            <div id="divRoles" class="form-group col-md-4">
+                                @Html.LabelFor(m => m.SelectedRolesIds, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                <div class="kt-checkbox-list">
+
+                                    @foreach (var role in Model.Roles)
+                                    {
+                                        <label class="kt-checkbox">
+                                            <input type="checkbox" name="SelectedRolesIds" value="@role.Id"> @role.Name
+                                            <span></span>
+                                        </label>
+                                    }
+                                </div>
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.SelectedRolesIds, "")</div>
+                                <div id="errorMsgRoles" class="invalid-feedback">@Messages.MustSelectRole</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <button type="submit" class="btn btn-primary">@Labels.Create</button>
+                            <a class="btn btn-cancel" asp-controller="Admins" asp-action="Index">@Labels.Cancel</a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <!--end::Form-->
+        </div>
+    </div>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+
+        $("document").ready(function () {
+
+            $("#errorMsgRoles").hide();
+
+            $('form').submit(function () {
+                return ValidateInputs();
+            })
+        });
+
+        function ValidateInputs() {
+
+            if ($('input[type = "checkbox"][name="SelectedRolesIds"]:checked:not(:disabled)').length === 0) {
+
+                $("#errorMsgRoles").show();
+                $("#divRoles").addClass("validated");
+                return false;
+            }
+            else {
+                $("#errorMsgRoles").hide();
+                $("#divRoles").removeClass("validated");
+                return true;
+            }
+        }
+
+    </script>

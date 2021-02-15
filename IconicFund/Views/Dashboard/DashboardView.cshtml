@@ -1,0 +1,604 @@
+﻿@{
+    ViewBag.Title = @CMS.LanguagePack.GenericLP.DashBoardTitle;
+}
+<script>
+    var ActionReturnDashBoardClassification = '@Url.Action("ReturnDashBoardClassification", "DashboardChart")';
+</script>
+
+<div class="cstmLoader" id="dashLoader" style="display:flex">
+    <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+    </div>
+</div>
+<div class="full-dashboard">
+    <div class="well well-sm search-cretria">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label class="control-label padding0 col-sm-3">@CMS.LanguagePack.Dashboard.ReceivedBy</label>
+                    <div class="col-sm-9">
+                        @Html.DropDownList("user_ddl", new SelectList(new CMS.BLL.Setting.SecurityUser_Bll().Get_Security_BasicInfo(), "ID", "Name"), @CMS.LanguagePack.GenericLP.SelectLb, new { @class = "select2 width100" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="form-group">
+                    <label class="control-label padding0 col-sm-2">@CMS.LanguagePack.Dashboard.Departements</label>
+                    <div class="col-sm-10">
+                        <div class="button-group">
+                            <button type="button" class="btn btn-default btn-sm dropdown-toggle fixInputWidth" data-toggle="dropdown">
+                                @CMS.LanguagePack.Dashboard.All
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu CheckboxIt">
+                                <li>
+                                    <a href="#" class="small" data-id="-1" tabindex="-1">
+                                        <input type="checkbox" data-id="-1" checked="checked"  class="changeAll"/>&nbsp;@CMS.LanguagePack.Dashboard.All
+                                    </a>
+                                </li>
+                                @foreach (var obj in new CMS.BLL.Setting.Department_Bll().GetAll(new List<string>()))
+                                {
+                                    <li>
+                                        <a class="small" data-id="@obj.Id" tabindex="-1" for="test">
+                                            <input type="checkbox" checked="checked" data-id="@obj.Id" class="DepartmentData" onchange="extractData()" name="test" />&nbsp;@obj.Name
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 hasCalender">
+                <div class="form-group">
+                    <label class="control-label padding0 col-sm-3">@CMS.LanguagePack.Dashboard.From </label>
+                    <div class='input-group date dashboard-date'>
+                        <input type='text' id="FromDate" class="form-control"  placeholder="MM/DD/YYYY " onchange="DateChange()" />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 hasCalender">
+                <div class="form-group">
+                    <label class="control-label padding0 col-sm-3">@CMS.LanguagePack.Dashboard.To </label>
+                    <div class='input-group date dashboard-date'>
+                        <input type='text' id="ToDate" class="form-control" placeholder="MM/DD/YYYY " onchange="DateChange()"  />
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle width100" data-toggle="dropdown">
+                           @CMS.LanguagePack.Dashboard.CorrespondentType
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu CheckboxIt">
+                            <li>
+                                <a href="#" class="small" data-id="-1" tabindex="-1">
+                                    <input type="checkbox" data-id="-1" checked="checked" class="changeAll" />&nbsp;@CMS.LanguagePack.Dashboard.All
+                                </a>
+                            </li>
+                            @foreach (var obj in new CMS.BLL.SystemLookup.CorrespondenceStatus_BLL().GetAll(new List<string>()))
+                            {
+                                <li>
+                                    <a href="#" class="small" data-id="@obj.Id" tabindex="-1">
+                                        <input type="checkbox" checked="checked" data-id="@obj.Id"  class="CorrespondenceStatusData" onchange="extractData()" />&nbsp;@(CMS.LanguagePack.Models.SiteLP.CultureUI == "en-GB" ? obj.ArabicName : obj.EnglishName)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle width100" data-toggle="dropdown">
+                            @CMS.LanguagePack.Dashboard.CorrespondentStatus
+
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu CheckboxIt">
+                            <li>
+                                <a href="#" class="small" data-id="-1" tabindex="-1">
+                                    <input type="checkbox" data-id="-1" checked="checked"  class="changeAll"/>&nbsp;@CMS.LanguagePack.Dashboard.All 
+                                </a>
+                            </li>
+                            @foreach (var obj in new CMS.BLL.SystemLookup.CorrespondenceInboxStatus_BLL().GetAll(new List<string>()))
+                            {
+                                <li>
+                                    <a href="#" class="small" data-id="@obj.Id" tabindex="-1">
+                                        <input type="checkbox" checked="checked" data-id="@obj.Id" class="CorrespondenceInboxStatusData" onchange="extractData()" />&nbsp;@(CMS.LanguagePack.Models.SiteLP.CultureUI == "en-GB" ? obj.ArabicName : obj.EnglishName)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle width100" data-toggle="dropdown">
+                            @CMS.LanguagePack.Dashboard.SubjectType
+
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu CheckboxIt">
+                            <li>
+                                <a href="#" class="small" data-id="-1" tabindex="-1">
+                                    <input type="checkbox" data-id="-1" checked="checked" class="changeAll" />&nbsp;@CMS.LanguagePack.Dashboard.All
+                                </a>
+                            </li>
+                            @foreach (var obj in new CMS.BLL.SystemLookup.TopicKind_BLL().Get_All_TopicKinds())
+                            {
+                                <li>
+                                    <a href="#" class="small" data-id="@obj.Id" tabindex="-1">
+                                        <input type="checkbox" checked="checked" data-id="@obj.Id" class="TopicKindData" onchange="extractData()"/>&nbsp;@(CMS.LanguagePack.Models.SiteLP.CultureUI == "en-GB" ? obj.AName : obj.EName)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle width100" data-toggle="dropdown">
+                            @CMS.LanguagePack.Dashboard.Priority
+
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu CheckboxIt">
+                            <li>
+                                <a href="#" class="small" data-id="-1" tabindex="-1">
+                                    <input type="checkbox" data-id="-1" checked="checked" class="changeAll" />&nbsp;@CMS.LanguagePack.Dashboard.All
+                                </a>
+                            </li>
+                            @foreach (var obj in new CMS.BLL.Setting.PriorityLevel_Bll().Get_All_PriorityLevels())
+                            {
+                                <li>
+                                    <a href="#" class="small" data-id="@obj.Id" tabindex="-1">
+                                        <input type="checkbox" checked="checked" data-id="@obj.Id" class="PriorityLevelData " onchange="extractData()" />&nbsp;@(CMS.LanguagePack.Models.SiteLP.CultureUI == "en-GB" ? obj.ArabicName : obj.EnglishName)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div> 
+                <div class="col-sm-2">
+                    <div class="button-group">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle width100" data-toggle="dropdown">
+                             @CMS.LanguagePack.Dashboard.Security
+
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu CheckboxIt">
+                            <li>
+                                <a href="#" class="small" data-id="-1" tabindex="-1">
+                                    <input type="checkbox" data-id="-1" checked="checked" class="changeAll" />&nbsp;@CMS.LanguagePack.Dashboard.All
+                                </a>
+                            </li>
+                            @foreach (var obj in new CMS.BLL.Setting.SecurityLevel_Bll().Get_All_SecurityLevels())
+                            {
+                                <li>
+                                    <a href="#" class="small" data-id="@obj.Id" tabindex="-1">
+                                        <input type="checkbox" checked="checked" data-id="@obj.Id" class="SecurityLevelData" onchange="extractData()" />&nbsp;@(CMS.LanguagePack.Models.SiteLP.CultureUI == "en-GB" ?obj.ArabicName:obj.EnglishName)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="main-radio radio-primary">
+                        <input type="radio" id="week" name="ClassifyBy" value="week" checked="checked">
+                        <label for="week">
+                            @CMS.LanguagePack.Dashboard.Week
+                        </label>
+                        <input type="radio" id="month" name="ClassifyBy" value="month">
+                        <label for="month">
+                            @CMS.LanguagePack.Dashboard.Month
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body chartBoxesContainer">
+            <div class="row">
+                @*corrStatus section*@
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel margin-top-10">
+                        <div class="x_title">
+                            <h2>
+                                @CMS.LanguagePack.Dashboard.CorrespondentPer @CMS.LanguagePack.Dashboard.CorrespondentType
+                            </h2>
+                            <ul class="nav navbar-left panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <div class="row">
+                                <div class="col-md-9" id="corrStatusBarDiv">
+                                    <div id="corrStatusBar" class="emptycls" style="height: 350px;"></div>
+                                </div>
+                                <div class="col-md-3" id="corrStatusPieDiv">
+                                    <div id="corrStatus_Pie" class="emptycls" style="height: 350px;"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                @*inbox status*@
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel margin-top-10">
+                        <div class="x_title">
+                            <h2>
+                               @CMS.LanguagePack.Dashboard.CorrespondentPer @CMS.LanguagePack.Dashboard.CorrespondentStatus
+                            </h2>
+                            <ul class="nav navbar-left panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <div class="row">
+                                <div class="col-md-9" id="InboxStatusBarDiv">
+                                    <div id="InboxStatusBar" class="emptycls" style="height: 350px;"></div>
+                                </div>
+                                <div class="col-md-3" id="InboxStatusPieDiv">
+                                    <div id="InboxStatus_Pie" class="emptycls" style="height: 350px;"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                @*topic kind*@
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel margin-top-10">
+                        <div class="x_title">
+                            <h2>
+                                @CMS.LanguagePack.Dashboard.CorrespondentPer @CMS.LanguagePack.Dashboard.SubjectType
+                            </h2>
+                            <ul class="nav navbar-left panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <div class="row">
+                                <div class="col-md-9" id="TopicKindBarDiv">
+                                    <div id="TopicKindBar" class="emptycls" style="height: 350px;"></div>
+                                </div>
+                                <div class="col-md-3" id="TopicKindPieDiv">
+                                    <div id="TopicKind_pie" class="emptycls" style="height: 350px;"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                @*priority level*@
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel margin-top-10">
+                        <div class="x_title">
+                            <h2>
+                                @CMS.LanguagePack.Dashboard.CorrespondentPer @CMS.LanguagePack.Dashboard.Priority
+                            </h2>
+                            <ul class="nav navbar-left panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <div class="row">
+                                <div class="col-md-9" id="PriorityLevelBarDiv">
+                                    <div id="PriorityLevelBar" class="emptycls" style="height: 350px;"></div>
+                                </div>
+                                <div class="col-md-3" id="PriorityLevelPieDiv">
+                                    <div id="PriorityLevel_pie" class="emptycls" style="height: 350px;"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                @*security level*@
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel margin-top-10">
+                        <div class="x_title">
+                            <h2>
+                               @CMS.LanguagePack.Dashboard.CorrespondentPer @CMS.LanguagePack.Dashboard.Security
+                            </h2>
+                            <ul class="nav navbar-left panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <div class="row">
+                                <div class="col-md-9" id="SecurityLevelBarDiv">
+                                    <div id="SecurityLevelBar" class="emptycls" style="height: 350px;"></div>
+                                </div>
+                                <div class="col-md-3" id="SecurityLevelPieDiv">
+                                    <div id="SecurityLevel_pie" class="emptycls" style="height: 350px;"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+      
+    </div>
+</div>
+
+<script src="~/Content/js/echarts.min.js"></script>
+<script src="~/Content/js/chart-data.js"></script>
+<script>
+    var SecurityLevelBarhtml = '<div id="SecurityLevelBar" class="emptycls" style="height: 350px;"></div>';
+    var SecurityLevelPiehtml = '<div id="SecurityLevel_pie" class="emptycls" style="height: 350px;"></div>';
+    //
+    var PriorityLevelBarhtml = '<div id="PriorityLevelBar" class="emptycls" style="height: 350px;"></div>';
+    var PriorityLevelPiehtml = '<div id="PriorityLevel_pie" class="emptycls" style="height: 350px;"></div>';
+    //
+    var TopicKindBarhtml = '<div id="TopicKindBar" class="emptycls" style="height: 350px;"></div>';
+    var TopicKindPiehtml = '<div id="TopicKind_pie" class="emptycls" style="height: 350px;"></div>';
+    //
+    var InboxStatusBarhtml = '<div id="InboxStatusBar" class="emptycls" style="height: 350px;"></div>';
+    var InboxStatusPiehtml = '<div id="InboxStatus_Pie" class="emptycls" style="height: 350px;"></div>';
+    //
+    var corrStatusBarhtml = '<div id="corrStatusBar" class="emptycls" style="height: 350px;"></div>';
+    var corrStatusPiehtml = '<div id="corrStatus_Pie" class="emptycls" style="height: 350px;"></div>';
+    function clearCharts() {
+        debugger
+        $("#SecurityLevelBarDiv").html(SecurityLevelBarhtml);
+        $("#SecurityLevelPieDiv").html(SecurityLevelPiehtml);
+        //
+        $("#PriorityLevelBarDiv").html(PriorityLevelBarhtml);
+        $("#PriorityLevelPieDiv").html(PriorityLevelPiehtml);
+        //
+        $("#TopicKindBarDiv").html(TopicKindBarhtml);
+        $("#TopicKindPieDiv").html(TopicKindPiehtml);
+        //
+        $("#InboxStatusBarDiv").html(InboxStatusBarhtml);
+        $("#InboxStatusPieDiv").html(InboxStatusPiehtml);
+        //
+        $("#corrStatusBarDiv").html(corrStatusBarhtml);
+        $("#corrStatusPieDiv").html(corrStatusPiehtml);
+    }
+    $(function () {
+        $('.dashboard-date').datetimepicker({     
+            format: 'DD/MM/YYYY',
+            useCurrent: false
+
+        });
+        //$(".select2").select2();
+        $('body').on('change', 'input[type=radio][name=ClassifyBy]', function () {
+            
+            extractData();
+        });
+        $('body').on('change', '#user_ddl', function () {
+
+            extractData();
+            //DashBoardCharts(id, 1);//1 for user
+        });
+        //$('body').on('change', 'input[type=checkbox][class=changeAll]', function () {
+        //    debugger;
+        //    $(this).parent('ul').find('input[type=checkbox]').attr('checked', $(this).checked);
+        //});
+        $(".changeAll").click(function () {
+            debugger;
+            $(this).parent('a').parent('li').parent('ul').find('input:checkbox').not(this).prop('checked', this.checked);
+            extractData()
+        });
+        $('.dashboard-date').on('dp.change', function (e) {
+            debugger;
+            var datefrom = $("#FromDate").val().split('/');//dd/mm/yy
+            var dateto = $("#ToDate").val().split('/');
+            var dateto = new Date(dateto[2], dateto[1], dateto[0]); //Year, Month, Date
+            var datefrom = new Date(datefrom[2], datefrom[1], datefrom[0]); //Year, Month, Date
+            //var dateTwo = new Date(2011, 00, 15); //Year, Month, Date
+            //datefrom = Date.parse(datefrom);
+            //dateto = Date.parse(dateto);
+            
+            if (datefrom != 'NaN' && dateto != 'NaN' && datefrom < dateto) {
+                extractData()
+            }
+        })
+
+    })
+    //function DateChange()
+    //{
+    //    debugger;
+    //    datefrom = $("#FromDate").val();
+    //    dateto = $("#ToDate").val();
+    //    datefrom = Date.parse(datefrom);
+    //    dateto = Date.parse(dateto);
+    //    if(datefrom!= 'NaN' && dateto!= 'NaN' && datefrom<dateto)
+    //    {
+    //        extractData()
+    //    }
+    //}
+    function extractData() {
+        debugger;
+        var secLevel = '';
+        $(".SecurityLevelData").each(function (i, obj) {
+            if (obj.checked) {
+                secLevel += obj.attributes['data-id'].value + ',';
+            }
+        });
+        if (secLevel == '')
+        { secLevel = '-1' }
+        var PriorityLevel = '';
+        $(".PriorityLevelData").each(function (i, obj) {
+            var checkAll = true;
+            //debugger
+            //    if (obj.checked == false) {
+            //        obj.parent('li').parent('ul').find("li:first-child input").prop('checked', false);
+            //    }
+            
+            if (obj.checked) {
+                PriorityLevel += obj.attributes['data-id'].value + ',';
+            }
+        });
+        if (PriorityLevel == '')
+        { PriorityLevel = '-1' }
+        var TopicKind = '';
+        $(".TopicKindData").each(function (i, obj) {
+            if (obj.checked) {
+                TopicKind += obj.attributes['data-id'].value + ',';
+            }
+
+        });
+        if (TopicKind == '')
+        { TopicKind = '-1' }
+        var CorrespondenceInboxStatus = '';
+        $(".CorrespondenceInboxStatusData").each(function (i, obj) {
+            if (obj.checked) {
+                CorrespondenceInboxStatus +=obj.attributes['data-id'].value + ',';
+            }
+
+        });
+        if (CorrespondenceInboxStatus == '')
+        { CorrespondenceInboxStatus = '-1' }
+        var CorrespondenceStatus = '';
+        $(".CorrespondenceStatusData").each(function (i, obj) {
+            if (obj.checked) {
+                CorrespondenceStatus += obj.attributes['data-id'].value + ',';
+            }
+        });
+        if (CorrespondenceStatus == '')
+        { CorrespondenceStatus = '-1' }
+        //
+        var Departments = '';
+        $(".DepartmentData").each(function (i, obj) {
+            if (obj.checked) {
+                Departments += obj.attributes['data-id'].value + ',';
+            }
+        });
+        if (Departments == '')
+        { Departments = '-1' }
+        var id = $("#user_ddl").val();
+        if (id <= 0) {
+            id = null;
+        }
+        debugger;
+        var datefrom = $("#FromDate").val();//dd/mm/yy
+        var dateto = $("#ToDate").val();
+        var datefromSplited = $("#FromDate").val().split('/');//dd/mm/yy
+        var datetoSplited = $("#ToDate").val().split('/');
+        var datetofinal = new Date(datetoSplited[2], datetoSplited[1], datetoSplited[0]); //Year, Month, Date
+        var datefromfinal = new Date(datefromSplited[2], datefromSplited[1], datefromSplited[0]); //Year, Month, Date
+        //var dateTwo = new Date(2011, 00, 15); //Year, Month, Date
+        //datefrom = Date.parse(datefrom);
+        //dateto = Date.parse(dateto);
+
+        if (datetofinal == 'NaN' || datefromfinal == 'NaN' || datefromfinal > datetofinal) {
+            dateto = null;
+            datefrom = null;
+        }
+        debugger;
+        DashBoardCharts(id, Departments, TopicKind, PriorityLevel, CorrespondenceStatus, CorrespondenceInboxStatus, secLevel, datefrom, dateto);
+        //DashBoardCharts(null, null, '', '', '', '', '', '', '');
+    }
+    $(window).load(function () {
+        //init_dashboard_echarts();
+        DashBoardCharts(null, null, '', '', '', '', '', '', '');
+        
+    })
+    function DashBoardCharts(id, departments, TopicKindId, PriorityId, CorrespondenceStatus, CorrespondenceInboxStatus, securityLevel, FromDate, ToDate) {
+        debugger;
+        $.ajax({
+            url: ActionReturnDashBoardClassification,
+            type: 'GET',
+            data: {
+                Id: id,
+                departments: departments,
+                TopicKindId: TopicKindId,//$("#TopicKindId").val(),
+                PriorityId: PriorityId,//$("#PriorityId").val(),
+                CorrespondenceStatus: CorrespondenceStatus,//$("#CorrespondenceStatus").val(),
+                CorrespondenceInboxStatus: CorrespondenceInboxStatus,//$("#CorrespondenceCategory").val(),
+                securityLevel:securityLevel,
+                FromDate: FromDate,//$("#RecievedFrom").val(),
+                ToDate: ToDate,//$("#RecievedTo").val(),
+                byMonth: 0//$('input[name=ClassifyBy]:checked').val()
+            },
+            success: function (result) {
+                debugger;
+                clearCharts();
+                
+                init_dashboard_echarts(result);
+                $("#dashLoader").css("display", "none");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                debugger;
+            }
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('.dropdown-menu').on({
+            "click": function (e) {
+                e.stopPropagation();
+            }
+        });
+        //$(".dropdown-menu li a").click(function () {
+        //    debugger;
+        //    if ($(this + "input").checked == true) {
+        //        $(this + "input").attr("checked", "false")
+        //    }
+        //    else {
+        //        $(this + "input").attr("checked", "true")
+        //    }
+        //})
+    });
+</script>

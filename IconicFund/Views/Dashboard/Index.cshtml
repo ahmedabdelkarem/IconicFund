@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "DashBoardTitle";
+}
+
+<script src="~/Dashboard/Chart.min.js"></script>
+<script src="~/Dashboard/charts.js"></script>
+<script>
+    @*var ActionReturnDashBoardClassification = '@Url.Action("ReturnDashBoardData", "Dashboard")';*@
+</script>
+<style>
+    .DashCharts {
+        padding-top: 50px;
+    }
+    .ResDetails {
+        overflow: auto;
+        border: 1px solid #8080FF;
+        height: 252px;
+        padding: 10px;
+    }
+</style>
+
+<div class="DashCharts">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="container">
+                    @*@Html.Partial("_DashboardHeader")*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                مدة إنجاز المعاملات
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                عدد المعاملات للقسم
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="DashBoxTitle">
+                    <h4 class="ChartTitle"></h4>
+                </div>
+                <div>
+                    <div id="pieMsgPerUserChartDiv">
+                        <canvas id="pieMsgPerUser"></canvas>
+                    </div>
+                    <div class="inline legend-xs">
+                        <div id="pieLegendMsgPerUser" class="chart-legend"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="chart-box">
+
+                    <div class="DashBoxTitle">
+                        <h4 class="ChartTitle"></h4>
+                    </div>
+                    <div>
+                        <div id="barMessageChartDiv">
+                            <canvas id="barChartMessages"></canvas>
+                        </div>
+                        <div class="inline legend-xs">
+                            <div id="barLegendMessages" class="chart-legend"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                أنواع المعاملات
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                أولوية المعاملات
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="chart-box">
+
+                    <div class="DashBoxTitle">
+                        <h4 class="ChartTitle"></h4>
+                    </div>
+                    <div>
+                        <div id="transactionsIsSecretBarChartMessagesDiv">
+                            <canvas id=" transactionsIsSecretBarChartMessages"></canvas>
+                        </div>
+                        <div class="inline legend-xs">
+                            <div id="barLegendMessages2" class="chart-legend"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="chart-box">
+
+                    <div class="DashBoxTitle">
+                        <h4 class="ChartTitle"></h4>
+                    </div>
+                    <div>
+                        <div id="transactionsPerioritybarChartMessagesDiv">
+                            <canvas id=" transactionsPerioritybarChartMessages"></canvas>
+                        </div>
+                        <div class="inline legend-xs">
+                            <div id="barLegendMessages3" class="chart-legend"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              @*الجهات المسؤولة عن المعاملة*@
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+               عدد المعملات بالنسبة للمصدر
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                @*<div class="chart-box">
+
+                    <div class="DashBoxTitle">
+                        <h4 class="ChartTitle"></h4>
+                    </div>
+                    <div>
+                        <div id="transactionsIsSecretBarChartMessagesDiv">
+                            <canvas id=" transactionsIsSecretBarChartMessages"></canvas>
+                        </div>
+                        <div class="inline legend-xs">
+                            <div id="barLegendMessages2" class="chart-legend"></div>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="chart-box">
+
+                    <div class="DashBoxTitle">
+                        <h4 class="ChartTitle"></h4>
+                    </div>
+                    <div>
+                        <div id="incomingTransactionsSourceBarChartMessagesDiv">
+                            <canvas id="incomingTransactionsSourceBarChartMessages"></canvas>
+                        </div>
+                        <div class="inline legend-xs">
+                            <div id="barLegendMessages4" class="chart-legend"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+@*<script src="~/Dashboard/Dashboard.js"></script>*@
+
+<script>
+    $('document').ready(function () {
+        debugger
+        DashBoardCharts();
+
+    })
+
+    function DashBoardCharts() {
+        debugger;
+         $.ajax({
+             url: '@Url.Action("ReturnDashBoardData", "Dashboard")',
+             type: "GET",
+             async: false,
+             data: {
+                 //AdminId: AdminId,
+             },
+             success: function (result) {
+                        debugger
+                        if (result.NoData) {
+                            $('#barMessageChartDiv').html(result.Message);
+                            $('#pieMsgPerUserChartDiv').html(result.Message);
+                            $('#transactionsPerioritybarChartMessagesDiv').html(result.Message);
+                            $('#transactionsIsSecretBarChartMessagesDiv').html(result.Message);
+                            $('#incomingTransactionsSourceBarChartMessagesDiv').html(result.Message);
+
+                        }
+                        else {
+                            var htmlReligion = "<canvas id='barChartMessages' class='maxHeight300'></canvas>";
+                            $('#barMessageChartDiv').html(htmlReligion);
+
+                            var htmlReligion = "<canvas id='transactionsPerioritybarChartMessages' class='maxHeight300'></canvas>";
+                            $('#transactionsPerioritybarChartMessagesDiv').html(htmlReligion);
+
+                            var htmlReligion = "<canvas id='transactionsIsSecretBarChartMessages' class='maxHeight300'></canvas>";
+                            $('#transactionsIsSecretBarChartMessagesDiv').html(htmlReligion);
+
+                            var htmlReligion = "<canvas id='incomingTransactionsSourceBarChartMessages' class='maxHeight300'></canvas>";
+                            $('#incomingTransactionsSourceBarChartMessagesDiv').html(htmlReligion);
+
+                            var htmlpieMsgPerUser = "<canvas id='pieMsgPerUser'></canvas>";
+                            $('#pieMsgPerUserChartDiv').html(htmlpieMsgPerUser);
+                            Charts.init(result);
+                        }
+                 }
+                })
+    }
+</script>

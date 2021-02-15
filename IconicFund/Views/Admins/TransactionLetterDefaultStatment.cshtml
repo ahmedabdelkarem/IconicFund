@@ -1,0 +1,47 @@
+﻿
+@model IconicFund.Web.Models.AdminViewModel
+<style>
+    .kt-portlet__body {
+        padding: 30px 10px;
+    }
+</style>
+<!--begin::Form-->
+@using (Html.BeginForm("SaveAdminDefaultLetterStatment", "Admins", FormMethod.Post, new { @class = "kt-form", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="kt-portlet__body">
+        <div class="kt-section kt-section--first">
+
+            <div class="form-group  ">
+                @Html.LabelFor(m => m.TransactionLetterDefaultStatment, new { @class = "kt-font-bold kt-font-dark" })
+                @Html.TextAreaFor(m => m.TransactionLetterDefaultStatment, new { @class = "form-control" })
+                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.TransactionLetterDefaultStatment, "")</div>
+            </div>
+
+        </div>
+        <div id="placeholder"></div>
+
+    </div>
+   
+        <div class="kt-portlet__foot">
+            <div class="kt-form__actions">
+                <button type="submit" class="btn btn-brand">@Labels.Save</button>
+            </div>
+        </div>
+
+}
+<!--end::Form-->
+@section Scripts {
+
+    <script>
+        $('document').ready(function () {
+            $(function () {
+                $('#TransactionLetterDefaultStatment').ckeditor();
+            });
+
+        });
+
+    </script>
+
+}
