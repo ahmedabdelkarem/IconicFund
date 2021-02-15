@@ -68,7 +68,6 @@ namespace IconicFund.Models.Entities
 
         [ForeignKey("Department")]
         public string DepartmentCode { get; set; }
-        public Department Department { get; set; }
 
         #endregion
 
@@ -76,9 +75,9 @@ namespace IconicFund.Models.Entities
 
         public byte[] ProfileImageData { get; set; }
 
-        
 
         public virtual ICollection<PermissionGroupAdmin> PermissionGroups { get; set; }
+
 
         public virtual ICollection<SystemLogging> LoggingData { get; set; }
 

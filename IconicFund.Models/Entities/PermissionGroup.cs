@@ -1,4 +1,5 @@
 ﻿using IconicFund.Helpers.Enums;
+using IconicFund.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

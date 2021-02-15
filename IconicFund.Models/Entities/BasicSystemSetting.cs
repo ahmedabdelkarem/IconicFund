@@ -10,11 +10,7 @@ namespace IconicFund.Models.Entities
   
         #region RequestDepartment
 
-        [Required]
-        [ForeignKey("Lkp_DateType")]
-        public int DateTypeId_Fk { get; set; }
-        public Lkp_DateType Lkp_DateType { get; set; }
-
+       
         #endregion
 
         [Required]

@@ -22,10 +22,7 @@ namespace IconicFund.Services.Services
           
         }
          
-        public async Task<List<Lkp_DateType>> getAll()
-        {
-            return await repository.GetAllAsync<Lkp_DateType>();
-        }
+    
       
     }
 }

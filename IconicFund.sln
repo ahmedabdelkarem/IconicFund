@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Resources", "Ico
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund.Services", "IconicFund.Services\IconicFund.Services.csproj", "{DBCD4A7D-8245-4255-830D-11616E190326}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund", "IconicFund\IconicFund.csproj", "{9D5AC22A-73D7-419F-B89B-C616BD315AC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IconicFund", "IconicFund\IconicFund.csproj", "{DC2DDE69-6079-417A-8818-4C88C6906F59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{DBCD4A7D-8245-4255-830D-11616E190326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBCD4A7D-8245-4255-830D-11616E190326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBCD4A7D-8245-4255-830D-11616E190326}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D5AC22A-73D7-419F-B89B-C616BD315AC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D5AC22A-73D7-419F-B89B-C616BD315AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D5AC22A-73D7-419F-B89B-C616BD315AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D5AC22A-73D7-419F-B89B-C616BD315AC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC2DDE69-6079-417A-8818-4C88C6906F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC2DDE69-6079-417A-8818-4C88C6906F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC2DDE69-6079-417A-8818-4C88C6906F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC2DDE69-6079-417A-8818-4C88C6906F59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

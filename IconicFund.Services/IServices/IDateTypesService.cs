@@ -9,7 +9,6 @@ namespace IconicFund.Services.IServices
 {
     public interface IDateTypesService
     { 
-        Task<List<Lkp_DateType>> getAll();
  
     }
 }

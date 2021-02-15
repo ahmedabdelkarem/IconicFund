@@ -13,12 +13,10 @@ namespace IconicFund.Context
 
         #region Tables
 
-       
-        public DbSet<Department> Departments { get; set; }
-      
+
         public DbSet<PermissionGroup> PermissionGroups { get; set; }
         public DbSet<PermissionGroupAdmin> PermissionGroupAdmins { get; set; }
-
+        
 
         public DbSet<BasicSystemSetting> BasicSystemSetting { get; set; }
 
@@ -35,7 +33,6 @@ namespace IconicFund.Context
 
         public DbSet<SystemLogging> SystemLogging { get; set; }
 
-        public DbSet<Lkp_DateType> Lkp_DateType { get; set; }
         public DbSet<Lkp_PasswordComplexity> Lkp_PasswordComplexity { get; set; }
 
         
@@ -56,9 +53,6 @@ namespace IconicFund.Context
             modelBuilder.Entity<AdminRole>().HasKey(i => new { i.AdminId, i.RoleId });
             modelBuilder.Entity<PermissionGroupAdmin>().HasKey(i => new { i.PermissionGroupCode, i.AdminId });
 
-           
-            //Foriegn Key constraints  
-            modelBuilder.Entity<Department>().HasOne(r => r.ParentDepartment).WithMany().OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Region>().HasOne(r => r.City).WithMany(c => c.Regions).OnDelete(DeleteBehavior.Restrict);
 

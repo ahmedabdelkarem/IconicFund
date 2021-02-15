@@ -65,7 +65,6 @@ namespace IconicFund.Services.Services
                                                                     && (string.IsNullOrEmpty(EmplyeeNo) || i.EmplyeeNo == EmplyeeNo)
                                                                    // && (string.IsNullOrEmpty(name) || string.Concat(i.FirstName,i.SecondName,i.ThirdName,i.LastName).Contains(name))
                                                                     && (string.IsNullOrEmpty(email) || (i.Email != null && i.Email.ToLower().Contains(email.ToLower())))
-                                                                    && (string.IsNullOrEmpty(DepartmentCode) || (i.Department.NameAr != null && i.Department.Code.ToLower().Contains(DepartmentCode.ToLower())))
                                                                     && (isActive.HasValue == false || i.IsActive == isActive)
                                                                     && (IsManager.HasValue == false || i.IsManager == IsManager)
                                                                     && (roleId.HasValue == false || i.Roles.Select(r => r.RoleId).Contains(roleId.Value)),
