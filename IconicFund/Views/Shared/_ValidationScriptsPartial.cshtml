@@ -1,0 +1,50 @@
+﻿<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/js/foolproof/mvcfoolproof.core.js"></script>
+<script src="~/js/foolproof/mvcfoolproof.jquery.validation.js"></script>
+<script src="~/js/foolproof/mvcfoolproof.unobtrusive.js"></script>
+
+<script type="text/javascript">
+    // Create a closure
+    (function () {
+
+        var originalAddClassMethod = jQuery.fn.addClass;
+
+        jQuery.fn.addClass = function () {
+            // Execute the original method.
+            var result = originalAddClassMethod.apply(this, arguments);
+
+            // trigger a custom event
+            // stop recursion...
+            if ((arguments[0] != "is-valid") && (arguments[0] != "is-invalid")) {
+                jQuery(this).trigger('cssClassChanged');
+            }
+
+            // return the original result
+            return result;
+        }
+    })();
+
+    // document ready function
+    $(function () {
+        $("input").bind('cssClassChanged', function () {
+            // cleanup
+            if ($(this).hasClass("is-valid")) {
+                $(this).removeClass("is-valid");
+            }
+            if ($(this).hasClass("is-invalid")) {
+                $(this).removeClass("is-invalid");
+            }
+
+            // remap the css classes to that of BootStrap
+            if ($(this).hasClass("input-validation-error")) {
+                $(this).addClass("is-invalid");
+            }
+
+            if ($(this).hasClass("valid")) {
+                $(this).addClass("is-valid");
+            }
+        });
+    });
+</script>

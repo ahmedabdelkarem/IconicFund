@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html>
+@inject IconicFund.Services.IServices.IBasicSystemSettingService BasicSystemSettingService
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4 & Angular 8
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html lang="en" direction="rtl" style="direction: rtl;">
+@{
+    var set = await BasicSystemSettingService.GetBasicSystemSettingById(1);
+
+    var folderPath = "/Uploads/Admins";
+    var FullPathLogo = folderPath + "/" + set?.SystemLogo;
+
+}
+<!-- begin::Head -->
+<head>
+    <base href="">
+    <meta charset="utf-8" />
+    <title> @set?.SystemTitle_Ar</title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/css/datepicker/query.calendars.picker.css" rel="stylesheet" />
+    <!--begin::Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+
+    <!--end::Fonts -->
+    <!--begin::Page Vendors Styles(used by this page) -->
+    <link href="/plugins/custom/fullcalendar/fullcalendar.bundle.rtl.css" rel="stylesheet" type="text/css" />
+
+    <!--end::Page Vendors Styles -->
+    <!--begin::Global Theme Styles(used by all pages) -->
+    <link href="/plugins/global/plugins.bundle.rtl.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
+
+    <link href="/css/site.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+    <!--end::Global Theme Styles -->
+    <!--table css-->
+    <link href="~/Table/vendor/animate/animate.css" rel="stylesheet" />
+    <link href="~/Table/vendor/select2/select2.css" rel="stylesheet" />
+    <link href="~/Table/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="~/Table/css/util.css" rel="stylesheet" />
+    <link href="~/Table/css/main.css" rel="stylesheet" />
+    <!--end table css-->
+    <!--begin::Layout Skins(used by all pages) -->
+    <!--end::Layout Skins -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css" />
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css" />
+
+    <link href="~/plugins/dropzone-5.7.0/dist/min/dropzone.min.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+    @*<link href="/css/mainrtl.css" rel="stylesheet" type="text/css" />*@
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+    <script src="~/js/thirdparty.bundle.js"></script>
+    <link href="/css/main.css" rel="stylesheet" type="text/css" />
+
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+    @RenderSection("Styles", false)
+
+    <link href="~/Styles/style.css" type="text/css" rel="stylesheet" />
+    <script src="~/Scripts/common.js"></script>
+
+
+</head>
+
+<!-- end::Head -->
+<!-- begin::Body -->
+<body class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-topbar kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+    <script src="/lib/jquery/dist/jquery.js" type="text/javascript"></script>
+
+
+    <div id="myModalDWT" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="width: 90%;">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">@Labels.Scan</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="myModalDWT_Div">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- begin::Page loader -->
+    <!-- end::Page Loader -->
+    <!-- begin:: Page -->
+    <!-- begin:: Header Mobile -->
+    @*<header  id="kt_header_mobile">
+            <div class="header">
+                <a href="#" class="logo_link">
+                    <img src="~/media/icons/logotask.png" alt="logo" class="logo" />
+                </a>
+                <p class="header-info">
+                    General Administration Portal For public relations and mass media
+                </p>
+
+                <div class="header-right">
+                    <a href="#">العربية</a>
+                </div>
+            </div>
+        </header>*@
+    @*<div class="kt-header-mobile  kt-header-mobile--fixed ">
+            <div class="kt-header-mobile__logo">
+                <a href="/">
+                    <img class="log" alt="Logo" src="/media/logos/logo17.png" />
+                </a>
+            </div>
+            <div class="kt-header-mobile__toolbar">
+                <button class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler"><span></span></button>
+                <button class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more-1"></i></button>
+            </div>
+        </div>*@
+
+    <!-- end:: Header Mobile -->
+    <div class="main-container">
+        <header>
+            <div class="header">
+                <a href="#" class="logo_link">
+                    <img src="~/media/icons/logotask.png" alt="logo" class="logo" />
+                </a>
+                <p class="header-info">
+                    @set?.SystemTitle_Ar
+                </p>
+
+                <div class="header-right">
+                    <span class="badge"><i class="far fa-bell badge badge-light"><span class="number_notifacation">4</span></i></span>
+
+                    @*<a href="#">العربية</a>*@
+                    <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px" aria-expanded="false">
+                            <span class="kt-header__topbar-welcome">مرحباً</span>
+                            <span class="kt-header__topbar-username">@sessionService.User?.FullName</span>
+                            <img class="kt-hidden" alt="Pic" src="/media/users/300_21.jpg">
+
+                            <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold kt-hidden-"><i class="fa fa-user"></i></span>
+                        </div>
+                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+
+                            <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-image: url(/media/misc/450.jpg)">
+                                <div class="kt-user-card__avatar">
+                                    <img class="kt-hidden" alt="Pic" src="/media/users/300_25.jpg" />
+
+                                    <span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success"><i class="fa fa-user"></i></span>
+                                </div>
+                                <div class="kt-user-card__name">
+                                    مدير النظــام
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="kt-notification">
+                                <a href="/Account/ChangePassword" class="kt-notification__item">
+                                    <div class="kt-notification__item-icon">
+                                        <i class="flaticon2-calendar-3 kt-font-success"></i>
+                                    </div>
+                                    <div class="kt-notification__item-details">
+                                        <div class="kt-notification__item-title kt-font-bold">
+                                            @Labels.ChangePassword
+                                        </div>
+                                        <div class="kt-notification__item-time">
+                                            Account settings and more
+                                        </div>
+                                    </div>
+                                </a>
+
+
+
+                                <div class="kt-notification__custom kt-space-between">
+                                    <a href="/Account/Logout" class="btn btn-label btn-label-brand btn-sm btn-bold">@Labels.SignOut</a>
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+
+        <aside class="sidenav">
+            <div class="sidemenu">
+
+
+                @*<button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>*@
+                <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+                    <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
+                        <ul class="kt-menu__nav ">
+
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text" style="font-size:22px !important;">التعريفات</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                    <ul class="kt-menu__subnav">
+
+                                        <!-- Menue Items here -->
+                                        <li class="kt-menu__item ">
+                                            <a href="/Departments" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-border-all"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.Departments</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item ">
+                                            <a href="/ExternalEntity" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-building"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.ExternalEntity</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item ">
+                                            <a href="/TransactionType" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-th"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.TransactionTypes</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item ">
+                                            <a href="/Folders" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-folder-open"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.Folders</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item ">
+                                            <a href="/HardCopyAttachmentsTypes" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-file-alt"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.HardCopyAttachmentsTypes</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item ">
+                                            <a href="/Actions" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-list-alt"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.Actions</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="kt-menu__item ">
+                                            <a href="/BasicSystemSetting" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-list-alt"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.SystemSetting</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            @if (sessionService.User?.Id == Guid.Parse(Constants.MainAdminId))
+                            {
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                    <a href="/Admins" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> @Labels.Admins</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+
+                                </li>
+                                <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                    <a href="/PermissionsGroup" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> @Labels.PermissionGroups</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+
+                                </li>
+
+                            }
+                            @*وارد جديد*@
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                <a href="/Transaction/AddIncomingTransactions" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> @Labels.AddIncomingTransaction</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                            </li>
+
+
+
+
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text" style="font-size:22px !important;"> المعاملات  </span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                <div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                    <ul class="kt-menu__subnav">
+
+                                        <!-- Menue Items here -->
+                                        <li class="kt-menu__item ">
+                                            <a href="/Transaction/ViewTransactionList" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-file-alt"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.ViewTransactionsList</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+
+                                        <li class="kt-menu__item ">
+                                            <a href="/Transaction/DoneTransactions" class="kt-menu__link ">
+                                                <span class="kt-menu__link-icon">
+                                                    <i class="fa fa-file-alt"></i>
+                                                </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.DoneTransactions</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            </a>
+                                        </li>
+
+
+                                        @*<li class="kt-menu__item ">
+                                                <a href="/Transaction/ReferralRequests" class="kt-menu__link ">
+                                                    <span class="kt-menu__link-icon">
+                                                        <i class="fa fa-file-alt"></i>
+                                                    </span><span class="kt-menu__link-text" style="white-space:nowrap;">@Labels.Referrals</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                                </a>
+                                            </li>*@
+
+
+
+                                    </ul>
+                                </div>
+                            </li>
+
+
+
+                            @*قائمة المعاملات*@
+
+                            @*قائمة الصادر*@
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                <a href="/Transaction/ViewExporingTransactions" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> @Labels.ExportingTransactions</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                            </li>
+                            @*الأرشيف*@
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                <a href="/Archive/Index" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> @Labels.Archive</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                            </li>
+                            @*الطلبات*@
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                <a href="/Requests/Index" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> @Labels.Requests</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                            </li>
+
+
+                            @*الإستعلامات*@
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                <a href="/Transaction/TransactionsAdvancedSearch" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> @Labels.AdvancedSearch</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                            </li>
+
+
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                <a href=" /SystemLogging" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> السجل </span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                            </li>
+
+                            @*الافاده*@
+                            <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel" aria-haspopup="false">
+                                <a href="/Admins/TransactionLetterDefaultStatment" class="kt-menu__link"><span class="kt-menu__link-text" style="font-size:22px !important;"> @Labels.Content</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="kt-header-toolbar">
+                        <!-- Search text box-->
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <i class="fas fa-arrow-right custom_fas  fa-2x"></i>
+        <i class="fas fa-sliders-h  custom_close fa-2x"></i>
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" id="content">
+
+            <!-- begin: Alerts -->
+            @if (TempData[Constants.SuccessMessage] != null)
+            {
+                <div id="dvSuccessAlert" class="alert alert-outline-success fade show" role="alert">
+                    <div class="alert-icon"><i class="flaticon-interface-5"></i></div>
+                    <div class="alert-text">@TempData[Constants.SuccessMessage]</div>
+                    <div class="alert-close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="la la-close"></i></span>
+                        </button>
+                    </div>
+                </div>
+            }
+
+            @if (TempData[Constants.WarningMessage] != null)
+            {
+                <div id="dvWarningAlert" class="alert alert-outline-warning fade show" role="alert">
+                    <div class="alert-icon"><i class="flaticon-warning-sign"></i></div>
+                    <div class="alert-text">@TempData[Constants.WarningMessage]</div>
+                    <div class="alert-close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="la la-close"></i></span>
+                        </button>
+                    </div>
+                </div>
+            }
+
+            @if (TempData[Constants.ErrorMessage] != null)
+            {
+                <div id="dvErrorAlert" class="alert alert-outline-danger fade show" role="alert">
+                    <div class="alert-icon"><i class="flaticon-cancel"></i></div>
+                    <div class="alert-text">@TempData[Constants.ErrorMessage]</div>
+                    <div class="alert-close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="la la-close"></i></span>
+                        </button>
+                    </div>
+                </div>
+            }
+            <!-- end: Alerts -->
+            <!-- begin:: Content -->
+            <!--Begin::Dashboard 2-->
+            @RenderBody()
+            <!--End::Dashboard 2-->
+            <!-- end:: Content -->
+        </div>
+        @*<footer>
+            <a href="http://www.apit.net.sa/" target="_blank">
+                <img src="~/media/icons/56.png" alt="logo_apan" /> @Labels.AlternativePath &copy;
+                <script type="text/javascript">document.write(new Date().getFullYear());</script>.
+
+            </a>
+        </footer>*@
+
+    </div>
+    <div class="modal fade- modal-sticky-bottom-right" id="kt_chat_modal" role="dialog" data-backdrop="false">
+
+    </div>
+
+    <!--ENd:: Chat-->
+    <!-- begin::Global Config(global config for global JS sciprts) -->
+    <script>
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#374afb",
+                    "light": "#ffffff",
+                    "dark": "#282a3c",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995"
+                },
+                "base": {
+                    "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                    "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+                }
+            }
+        };
+    </script>
+
+    <!-- end::Global Config -->
+    <!--begin::Global Theme Bundle(used by all pages) -->
+    <script src="/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+    <script src="/js/scripts.bundle.js" type="text/javascript"></script>
+    <script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.plugin.min.js"></script>
+    <script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.js"></script>
+    <script src="~/js/datepicker/jquery.calendars-ar.js"></script>
+    <script src="~/js/datepicker/jquery.calendars.picker.js"></script>
+    <script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.plus.min.js"></script>
+    <script src="~/js/datepicker/jquery.calendars.islamic.js"></script>
+    <script src="~/js/datepicker/jquery.calendars.islamic-ar.js"></script>
+    <script src="~/js/datepicker/jquery.calendars.lang.js"></script>
+    <script src="~/js/datepicker/jquery.calendars.picker-ar.js"></script>
+    <!--end::Global Theme Bundle -->
+    <!--begin::Page Vendors(used by this page) -->
+    <script src="/plugins/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
+    <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>
+    <script src="/plugins/custom/gmaps/gmaps.js" type="text/javascript"></script>
+
+    <!--end::Page Vendors -->
+    <!--begin::Page Scripts(used by this page) -->
+    <script src="/js/pages/dashboard.js" type="text/javascript"></script>
+    <script src="/lib/bootstrap-datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    @*<script src="/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js" type="text/javascript"></script>*@
+
+    <script src="~/js/site.js" type="text/javascript"></script>
+    <!--table script-->
+
+    <script src="~/Table/vendor/select2/select2.js"></script>
+
+    <script src="~/plugins/dropzone-5.7.0/dist/dropzone.js"></script>
+
+
+    <script src="~/Table/js/main.js"></script>
+    <!--end table script-->
+    @*<script src="~/ckeditor/ckeditor.js"></script>
+        <script src="~/ckeditor/adapters/jquery.js"></script>*@
+
+    <script src="~/fullckeditor/ckeditor.js"></script>
+    <script src="~/fullckeditor/adapters/jquery.js"></script>
+
+
+    <script>
+
+        $('document').ready(function () {
+            debugger
+
+            //Hide the alert messages
+            setTimeout(function () {
+                $('#dvSuccessAlert').hide()
+            }, 4000);
+
+            setTimeout(function () {
+                $('#dvWarningAlert').hide()
+            }, 6000);
+
+            setTimeout(function () {
+                $('#dvErrorAlert').hide()
+            }, 6000);
+
+
+            $(".Select2").select2();
+
+
+            $('.ddlAdmins').change(function () {
+                debugger
+                var AdminId = $(this).val();
+
+                $.ajax({
+                    url: '@Url.Action("GetAdminsDetails", "Account")',
+                    type: "POST",
+                    async: false,
+                    data: {
+                        AdminId: AdminId,
+                    },
+                    success: function (response) {
+                        debugger
+                        window.location.href = "/Home/Index";
+                    }
+                })
+            });
+
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            //$(".timeOnly").datetimepicker({
+            //    format: 'HH:mm'
+            //});
+
+            $('.timeOnly').datetimepicker({
+                pickDate: false,
+                //minuteStep: 15,
+                pickerPosition: 'bottom-right',
+                format: 'HH:ii',
+                autoclose: true,
+                //showMeridian: true,
+                startView: 1,
+                maxView: 1,
+            });
+        });
+
+        function ViewAttachmentFileInPartial(fileName , divId) {
+            $.ajax({
+                type: "GET",
+                url: "/Transaction/ShowDocumentInPartialView",
+                data: { FilePath: fileName },
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+
+
+                    $("#"+divId).html(response);
+
+
+                },
+                error: function (errorData) { alert(errorData); }
+            });
+        }
+
+        function DWTScan() {
+            window.location.href = "/DWT/Index";
+              @*$.ajax({
+                 type: "Get",
+                 url: '@Url.Action("Index", "DWT")',
+                 data: {
+
+                 },
+                 datatype: "html",
+                 success: function (data) {
+                     $('#myModalDWT_Div').html(data);
+                 }
+              });*@
+        }
+
+    </script>
+
+    @RenderSection("scripts", false)
+
+    <script>
+        $(".custom_fas").click(function () {
+            $('.kt-container.kt-container--fluid').css('padding', '150px 45px 0 20px');
+                $('.kt-header-menu-wrapper').css('display', 'none');
+            $('.custom_fas').css('display', 'none');
+            $('.custom_close').css('display', 'block');
+            $('.custom_close').css('right', '10px');
+            $('.header').css('right', '45px');
+
+            
+            
+        });
+        $(".custom_close").click(function () {
+            $('.kt-container.kt-container--fluid').css('padding', '150px 300px 0 20px');
+            $('.kt-header-menu-wrapper').css('display', 'block');
+            $('.custom_close').css('display', 'none');
+            $('.custom_fas').css('display', 'block');
+            $('.custom_fas').css('right', '250px');
+            $('.header').css('right', '275px');
+
+        });
+
+        
+    </script>
+    <!--end::Page Scripts -->
+</body>
+
+<!-- end::Body -->
+</html>

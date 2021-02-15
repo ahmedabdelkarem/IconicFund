@@ -1,0 +1,131 @@
+﻿@model IconicFund.Web.Models.PermissionsGroupsViewModel
+    <style>
+        .kt-portlet__head {
+            padding: 0 20px !important;
+        }
+    </style>
+    <link href="~/css/datepicker/query.calendars.picker.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />*@
+    @*<script type="text/javascript" src="js/jquery.min.js"></script>*@
+    @*<script type="text/javascript" src="js/bootstrap.min.js"></script>*@
+
+    <!-- Include the plugin's CSS and JS: -->
+    @*<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>*@
+    @*<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css" />*@
+
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon"><i class="kt-font-brand flaticon2-lock"></i></span>
+                <h3 class="kt-portlet__head-title"> @Labels.Create @Labels.PermissionsGroup </h3>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <!--begin::Form-->
+            @using (Html.BeginForm("Create", "PermissionsGroup", FormMethod.Post, new { @class = "kt-form col-md-12", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="kt-portlet__body">
+                    <div class="kt-section kt-section--first">
+                        <div class="form-group">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.Name, new { @class = "kt-font-bold kt-font-dark" })
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Name, "")</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.StartDate, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                <div class='input-group date'>
+                                    <input type="text" asp-for="@Model.StartDate" placeholder="@Messages.ChooseDate" class=" form-control txtHijriDate" asp-format="{0:dd-MMMM-yyyy}">
+                                    <div class="input-group-append"> <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>   </div>
+                                    <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.StartDate, "") </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Ger_StartDate, new { @class = "kt-font-bold kt-font-dark" })<span style="color:#ef4040; margin-@Labels.Left:3px;">*</span>
+                                <div class='input-group date'>
+                                    <input type="text" asp-for="@Model.Ger_StartDate" placeholder="@Messages.ChooseDate" class=" form-control txtGregorianDate" asp-format="{0:dd-MMMM-yyyy}">
+                                    <div class="input-group-append"> <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>   </div>
+                                    <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Ger_StartDate, "") </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.EndDate, new { @class = "kt-font-bold kt-font-dark" })
+                                <div class='input-group date'>
+                                    <input type="text" asp-for="@Model.EndDate" placeholder="@Messages.ChooseDate" class=" form-control txtHijriDate" asp-format="{0:dd-MMMM-yyyy}">
+                                    <div class="input-group-append"> <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>   </div>
+
+                                    <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.EndDate, "") </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.Ger_EndDate, new { @class = "kt-font-bold kt-font-dark" })
+                                <div class='input-group date'>
+                                    <input type="text" asp-for="@Model.Ger_EndDate" placeholder="@Messages.ChooseDate" class=" form-control txtGregorianDate" asp-format="{0:dd-MMMM-yyyy}">
+                                    <div class="input-group-append"> <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>   </div>
+
+                                    <div class="invalid-feedback">@Html.ValidationMessageFor(m => m.Ger_EndDate, "") </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(m => m.ViewSecretTransactions, new { @class = "kt-font-bold kt-font-dark" })
+                                <div class="kt-radio-inline">
+                                    <label class="kt-radio">
+                                        @Html.RadioButtonFor(m => m.ViewSecretTransactions, true)
+                                        @Labels.Yes
+                                        <span></span>
+                                    </label>
+                                    <label class="kt-radio">
+                                        @Html.RadioButtonFor(m => m.ViewSecretTransactions, false)
+                                        @Labels.No
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group validated">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-form__actions">
+                        <button type="submit" class="btn btn-success">@Labels.Create</button>
+                        <a class="btn btn-cancel" asp-controller="PermissionsGroup" asp-action="Index">@Labels.Cancel</a>
+                    </div>
+                </div>
+            }
+            <!--end::Form-->
+        </div>
+    </div>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+
+
+
+    <script>
+
+        $("document").ready(function () {
+
+            $("#errorMsgRoles").hide();
+        });
+
+
+
+    </script>

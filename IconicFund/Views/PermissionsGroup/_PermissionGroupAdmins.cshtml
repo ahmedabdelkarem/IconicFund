@@ -1,0 +1,69 @@
+﻿@model IconicFund.Web.Models.PermissionGroupAdminPartialViewModel
+<!--begin::Modal-->
+
+   
+        <div class="modal" id="addAdminsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@Labels.Create @Labels.GroupAdmins</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+
+                    <div class="modal-body" formaction="PermissionGroupAdmins">
+                        <div class="kt-portlet kt-portlet--mobile">
+                            <div class="kt-portlet__body">
+                                <div class="row">
+                                    <div class="kt-checkbox-list">
+                                        @if (Model.AdminsList != null)
+                                        {
+                                            @foreach (var admin in Model.AdminsList)
+                                            {
+
+                                                @if (Model.PermissionGroupAdminList.Where(a => a.AdminId == admin.Id).Select(a => a.Admin.FirstName).FirstOrDefault() != null)
+                                                {
+                                                    <label class="kt-checkbox" >
+                                                        <input id="checkbox_@admin.Id" type="checkbox" name="@admin.Id" value="@admin.Id" onchange="CheckBoxChanged('@admin.Id')" checked> @admin.FirstName @admin.LastName
+                                                        <span></span>
+                                                    </label>
+
+                                                }
+                                                else
+                                                {
+                                                    <label class="kt-checkbox">
+                                                        <input  id="checkbox_@admin.Id" type="checkbox" name="@admin.Id" value="@admin.Id" onchange="CheckBoxChanged('@admin.Id')"> @admin.FirstName @admin.LastName
+                                                        <span></span>
+                                                    </label>
+
+                                                }
+
+                                            }
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@Labels.Cancel</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+   
+
+
+
+
+<!--end::Modal-->

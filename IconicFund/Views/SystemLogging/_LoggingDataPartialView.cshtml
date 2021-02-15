@@ -1,0 +1,121 @@
+﻿
+
+@model LoggingDataViewModel
+
+
+
+@switch (Model.ActionType)
+{
+    case LoggingAction.Create:
+        <div class="row">
+            <div class="col-md-6">
+                <h3> البيانات المضافه </h3>
+
+                <br />
+
+                <div class="card" style="width:363px !important">
+                    <ul class="list-group list-group-flush">
+
+
+                        @for (int i = 0; i < Model.OldData.Count; i++)
+                        {
+                            string key = Model.OldData.Keys.ElementAt(i);
+                            string value = Model.OldData[key];
+
+
+                            <li class="list-group-item"> @key  &nbsp; :  &nbsp; @value  </li>
+                        }
+
+
+                    </ul>
+                </div>
+
+
+
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        break;
+    case LoggingAction.Edit:
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3> البيانات القديمه </h3>
+                <br />
+                <div class="card" style="width:363px !important">
+                    <ul class="list-group list-group-flush">
+
+
+                        @for (int i = 0; i < Model.OldData.Count; i++)
+                        {
+                            string key = Model.OldData.Keys.ElementAt(i);
+                            string value = Model.OldData[key];
+
+
+                            <li class="list-group-item"> @key  &nbsp; :  &nbsp; @value  </li>
+                        }
+
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <h3> البيانات الجديده </h3>
+                <br />
+                <div class="card" style="width:363px !important">
+                    <ul class="list-group list-group-flush">
+
+
+                        @for (int i = 0; i < Model.NewData.Count; i++)
+                        {
+                            string key = Model.NewData.Keys.ElementAt(i);
+                            string value = Model.NewData[key];
+
+
+                            <li class="list-group-item"> @key  &nbsp; :  &nbsp; @value  </li>
+                        }
+
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        break;
+    case LoggingAction.Delete:
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3> البيانات المحذوفه </h3>
+                <br />
+                <div class="card" style="width:363px !important">
+                    <ul class="list-group list-group-flush">
+
+
+                        @for (int i = 0; i < Model.OldData.Count; i++)
+                        {
+                            string key = Model.OldData.Keys.ElementAt(i);
+                            string value = Model.OldData[key];
+
+
+                            <li class="list-group-item"> @key  &nbsp; :  &nbsp; @value  </li>
+                        }
+
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+        break;
+
+}

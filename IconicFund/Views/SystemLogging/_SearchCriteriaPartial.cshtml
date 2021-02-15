@@ -1,0 +1,70 @@
+﻿
+@model LoggingViewModel
+
+<div class="kt-portlet kt-portlet--mobile">
+
+    <div class="kt-portlet__body">
+        <div id="divList">
+
+            <div class="form-row col-sm-12">
+
+                <div class="col-md-3">
+                    <label> @Labels.FromDate </label>
+                    <input type="text" asp-for="DateFrom" class="form-control txtHijriDate" />
+                </div>
+
+                <div class="col-md-3">
+                    <label> @Labels.ToDate </label>
+                    <input type="text" asp-for="DateTo" class="form-control txtHijriDate" />
+                </div>
+
+                <div class="col-md-3">
+                    <label> المديول </label>
+                    <select asp-for="LoggingCategory" class="form-control">
+                        <option value="">  </option>
+                        @foreach (var type in Enum.GetNames(typeof(LoggingCategory)))
+                        {
+                            var CategoryEnum = Enum.Parse<LoggingCategory>(type);
+                            <option value="@type">
+                                @CategoryEnum.GetDescription()
+                            </option>
+
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label> نوع العمليه </label>
+                    <select asp-for="LoggingAction" class="form-control">
+                        <option value="">  </option>
+                        @foreach (var type in Enum.GetNames(typeof(LoggingAction)))
+                        {
+                            var ActionEnum = Enum.Parse<LoggingAction>(type);
+                            <option value="@type">
+                                @ActionEnum.GetDescription()
+                            </option>
+
+                        }
+                    </select>
+                </div>
+
+
+
+             
+
+            </div>
+
+            <div class="form-row col-sm-12" style="margin-top:25px;">
+                <div class="col-md-3">
+                    <label> الرقم التعريف </label>
+                    <input type="text" asp-for="RowID" class="form-control" />
+                </div>
+
+                <div class="col-md-3" style="margin-top:25px;">
+                    <button class="btn btn-success  btn-sm kt-btn--icon" onclick="search()" style="margin-top: 5px"> @Labels.Search </button>
+                    <button class="btn-reset btn-sm kt-btn--icon" onclick="resetSearchElements()" style="margin-top: 5px"> @Labels.Reset </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,37 @@
+﻿@model IconicFund.Web.Models.PermissionsGroupsViewModel
+@inject IconicFund.Services.IServices.IPermissionsService _permissionsService
+
+
+<div class="kt-portlet kt-portlet--mobile">
+    <div class="kt-portlet__body">
+
+
+        <div class="row">
+            <div class="kt-checkbox-list" id="checkboxes">
+
+                @foreach (var permission in await _permissionsService.getAll())
+                {
+                    var item = permission;
+
+                    if (Model.PermissionsListValues != null && Model.PermissionsListValues.Contains(item.ID.ToString()))
+                    {
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="@(item.ID)" value="@(item.ID)" checked> @item.Name @*@item.GetDescription()*@
+                            <span></span>
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="kt-checkbox">
+                            <input type="checkbox" name="@(item.ID)" value="@(item.ID)"> @item.Name @*@item.GetDescription()*@
+                            <span></span>
+                        </label>
+                    }
+
+                }
+
+            </div>
+        </div>
+
+    </div>
+</div>

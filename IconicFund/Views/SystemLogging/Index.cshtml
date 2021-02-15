@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <style>
+        .kt-portlet__head {
+            padding: 0 20px !important;
+        }
+    </style>
+
+@model LoggingViewModel
+
+
+
+
+<div class="kt-portlet kt-portlet--mobile">
+    <div class="kt-portlet__head kt-portlet__head--lg">
+        <div class="kt-portlet__head-label">
+            <span class="kt-portlet__head-icon"><i class="kt-font-brand flaticon2-lock"></i></span>
+            <h3 class="kt-portlet__head-title"> السجل</h3>
+        </div>
+
+    </div>
+    <div class="kt-portlet__body">
+        @await Html.PartialAsync("_SearchCriteriaPartial", Model)
+
+        <div id="divList">
+            <!-- begin: Datatable -->
+            <div class="table100 ver1 ">
+                <table class="table table-striped table-bordered table-hover table-checkable">
+                    <thead>
+                        <tr class="bg-dark" style="color:white;">
+                            <th>المديول </th>
+                            <th>العمليه</th>
+                            <th>تاريخ العمليه </th>
+                            <th> الرقم التعريفي </th>
+                            <th>المستخدم </th>
+                            <th>@Labels.Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        @if (Model.LoggingList?.Count > 0)
+                        {
+                            foreach (var item in Model.LoggingList)
+                            {
+                                <tr>
+                                    <td>@item.LoggingCategory.ToString()</td>
+
+                                    <td>
+                                        @item.LoggingAction.ToString()
+                                    </td>
+                                    <td>
+                                        @item.ActionDate.ToString("dd-MMMM-yyyy")
+                                    </td>
+                                    <td>
+                                        @item.RowID
+                                    </td>
+
+                                    <td>
+
+                                        @item.UserName
+
+                                    </td>
+
+                                    <td>
+                                        <a href="#" onclick="GetLoggingDetails('@item.ID')" class="btn btn-sm btn-info btn-icon btn-icon-md">
+                                            <i class="la la-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="7">@Messages.NoData</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!--end: Datatable -->
+            <!--begin: Pagination-->
+            @if (Model.LoggingList?.Count > 0)
+            {
+                <div class="kt-pagination  kt-pagination--brand">
+
+                    <div data-target="#divList">
+
+                        @Html.PagedListPager(Model.LoggingList, page => Url.Action("Index", "Requests", new { page = page }))
+
+                    </div>
+
+
+
+                </div>
+            }
+            <!--end: Pagination-->
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="LogDataModel" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="row">
+                    <div id="divLogDataOldAndNew">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Labels.Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    //asp-controller="GetLogDetails" asp-action="SystemLogging" asp-route-RequestID="item.ID"
+
+
+    function GetLoggingDetails(Id) {
+        $.ajax({
+            type: "GET",
+            url: "/SystemLogging/GetLogDetailsPartial",
+            data: { LogID: Id },
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+
+
+                $("#divLogDataOldAndNew").html(response);
+                $('#LogDataModel').modal('toggle');
+
+            },
+            error: function (errorData) { alert(errorData); }
+        });
+    }
+
+    function resetSearchElements() {
+
+      
+        window.location = "/SystemLogging";
+
+    }
+
+    function search() {
+
+
+        // DateTime?  = null,
+       // DateTime ?  = null, string RowId = "",  ? LoggingAction = null, LoggingCategory ?  
+
+        var DateFrom = $('#DateFrom').val();
+
+        var DateTo = $("#DateTo").val();
+
+        var RowId = $("#RowID").val();
+
+        var LoggingAction = $("#LoggingAction").val();
+
+
+        var LoggingCatogry = $("#LoggingCategory").val();
+
+        window.location = "/SystemLogging?DateFrom=" + DateFrom + "&DateTo=" + DateTo + "&RowId=" + RowId + "&LoggingAction=" + LoggingAction
+            + "&LoggingCategory=" + LoggingCatogry;
+        
+    }
+
+</script>
